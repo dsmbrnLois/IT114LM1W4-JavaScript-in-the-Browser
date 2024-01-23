@@ -15,20 +15,87 @@
             // Resource: https://www.freecodecamp.org/news/how-to-fetch-data-from-an-api-using-the-fetch-api-in-javascript/
 
             // Checkpoint 4.1 What are HTTP requests and reponses? What are the various HTTP verbs and what do they do?
-            // Answer: 
+            /* Answer: HTTP Requests are communications initiated by a client. While an HTTP Responses:are messages dispatched by a server in reply to an HTTP request. 
+            Various HTTP Verbs:
+            GET: Retrieve data from a designated resource.
+            POST: Submit data to a specified resource for processing.
+            PUT: Update a specified resource.
+            DELETE: Delete a designated resource. */
 
             // Todo 4.1 Fetch the list of users. Outout the first and second page of users.
-
+            fetch('https://reqres.in/api/users?page=1')
+                .then(res => res.json())
+                .then(dataPage1 => {
+                    console.log('First page of users:', dataPage1.data);
+                    return fetch('https://reqres.in/api/users?page=2');
+                })
+                .then(res => res.json())
+                .then(dataPage2 => {
+                    console.log('Second page of users:', dataPage2.data);
+                })
+                .catch(error => console.error('Error fetching users:', error));
             // Todo 4.2 Fetch the information about a single user. Display their information
-
+            fetch('https://reqres.in/api/users/3')
+                .then(res => res.json())
+                .then(data => console.log(data))
+                .catch(error => console.log(error))
             // Todo 4.3 Create a user
-
+            fetch('https://reqres.in/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: 'Lebron James',
+                job: 'Singer',
+            }),
+            })
+            .then(res => res.json())
+            .then(data => console.log('Created user information:', data))
+            .catch(error => console.error('Error creating user:', error));
             // Todo 4.4 Update the information of the user that you have created
+            const userIdToUpdate = 'USER_ID';
 
+            fetch(`https://reqres.in/api/users/${userIdToUpdate}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: 'Kobe Bryant',
+                    job: 'Dancer',
+                }),
+            })
+                .then(res => res.json())
+                .then(data => console.log('Updated user information:', data))
+                .catch(error => console.error('Error updating user:', error))
             // Todo 4.5 Delete the user that you have created
-
+            fetch("https://reqres.in/api/users/2" , {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: 'Kobe Bryant',
+                    job: 'Dancer',
+                })
+            }).then(res => {
+                if (res.ok) 
+                {
+                    console.log('User Deleted,',res.status);
+                } else 
+                {
+                    console.error('Error deleting user.');
+                }
+            })
+            
             // Checkpoint 4.2 What is the difference between callbacks, then-catch vs await-try-catch? When should you use one over the other
-            // Answer: 
+            /* Answer: Callbacks: A conventional method for managing asynchronous operations. It may result in callback hell (nested callbacks) and is employed when compatibility or specific situations demand it.
+
+            Promises (then-catch): Introduced to streamline asynchronous code. Permits chaining with .then() for sequential execution and handling errors with .catch(). Favored over callbacks for enhanced readability and maintainability.
+
+            Async/Await with try-catch: Introduced to produce cleaner, more synchronous-looking code. Preferred when working with promises, it diminishes nesting, enhancing code readability. Appropriate for use in modern JavaScript environments where support is available.
+            */
         }
         start()
 

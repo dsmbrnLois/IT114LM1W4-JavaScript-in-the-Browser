@@ -34,13 +34,21 @@
         const unorderedList = document.getElementById("subjects-taken")
         console.log(unorderedList)
         // Checkpoint 2.1 What are the other ways to select elements in the DOM?
-        // Answer:
+        // Answer: document.querySelector(), document.getElementsByClassName(), document.getElementsByTagName()
 
         // Todo 2.2 Set the text of the second list item to "IT102 - Python Fundamentals"
         // Resource: https://www.javascripttutorial.net/javascript-dom/javascript-get-child-element/
         unorderedList.children[1].textContent = "IT102 - Python Fundamentals";
         // Checkpoint 3.2 What is the difference between innerText, textContent, and innerHTML. When should you use one over the other?
-        // Answer:
+        /* Answer: 
+        textContent: It establishes or retrieves the text content of a node and its offspring. 
+        It exhibits greater uniformity across various browsers and does not interpret HTML. Use it when managing the plain textual content.
+
+        innerText: Comparable to textContent, it takes into account rendering and might alter the text based on the visibility of elements. 
+        Use it when desiring to obtain the text that is currently visible.
+
+        innerHTML: It establishes or retrieves the HTML content of an element, enabling the inclusion of HTML markup. 
+        Use it when there is a need to handle or retrieve HTML-based content. */
 
         // Todo 2.3 Create another list item, and add it as a child of the unordered list
         //          Set the text of the list item to your favorite subject
@@ -57,7 +65,9 @@
         // Todo 2.5 Delete the third list item in the unordered list
         unorderedList.children[2].remove();
         // Checkpoint 2.3 What is the difference between node and element?
-        // Answer:
+        /* Answer: A node serves as a broad term encompassing any object, while an element stands out as a specialized type of node specifically 
+        denoting an HTML element. Every element qualifies as a node, yet the 
+        reverse is not universally true, some nodes may not be elements. These nodes can encompass attributes, text, comments, and other components. */
 
         // Bonus Todo 2.6 Select the parent of the unordered list.
         const parentElement = unorderedList.parentNode
